@@ -42,8 +42,6 @@ const skills = [
   { id: 'javascript', name: 'JavaScript', color: '#F7DF1E' },
   { id: 'html', name: 'HTML', color: '#E34F26' },
   { id: 'css', name: 'CSS', color: '#1572B6' },
-  { id: 'node', name: 'Node.js', color: '#339933' },
-  { id: 'mongodb', name: 'MongoDB', color: '#47A248' },
   { id: 'git', name: 'Git', color: '#F05032' },
   { id: 'php', name: 'PHP', color: '#777BB4' },
   { id: 'sql', name: 'SQL', color: '#4479A1' },
