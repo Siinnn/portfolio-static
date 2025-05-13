@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Yanis ALI WACHEHI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles/App.css" />
+    <link rel="stylesheet" href="styles/Navbar.css" />
+    <link rel="stylesheet" href="styles/About.css" />
+    <link rel="stylesheet" href="styles/Projects.css" />
+    <link rel="stylesheet" href="styles/Contact.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-links">
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+      </div>
+      <div class="logo-container" id="logo-top">
+        <div class="logo">Y</div>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/Siinnn" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/yanis-ali-wachehi-3753221a5/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="assets/cv.pdf" download>
+          <i class="fas fa-download"></i>
+        </a>
+      </div>
+    </nav>
+    <main>
+      <!-- About Section -->
+      <section id="about" class="section about-section">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Yanis ALI WACHEHI</h1>
+            <p class="subtitle">Développeur Full Stack</p>
+            <div class="typing-text">
+              <p id="typing-text"></p>
+              <span class="cursor">|</span>
+            </div>
+          </div>
+          <div id="competences" class="skills-container">
+            <h3>Mes Compétences</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <div class="skill-icon">
+                  <i class="fab fa-html5"></i>
+                </div>
+                <h4>Front-end</h4>
+                <div class="skill-list">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                  <span>Vue.js</span>
+                  <span>React</span>
+                  <span>Flutter</span>
+                </div>
+              </div>
+              <div class="skill-card">
+                <div class="skill-icon">
+                  <i class="fas fa-server"></i>
+                </div>
+                <h4>Back-end</h4>
+                <div class="skill-list">
+                  <span>PHP</span>
+                  <span>Symfony</span>
+                  <span>Node.js</span>
+                  <span>SQL</span>
+                  <span>Java</span>
+                  <span>Python</span>
+                </div>
+              </div>
+              <div class="skill-card database-card">
+                <div class="skill-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+                <h4>Bases de données</h4>
+                <div class="skill-list">
+                  <span>MySQL</span>
+                  <span>MongoDB</span>
+                  <span>Firebase</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Projects Section -->
+      <section id="projets" class="section projects-section">
+        <div class="container">
+          <h2>Mes Projets</h2>
+          <div class="skills-filter" id="skills-filter"></div>
+          <div class="projects-grid" id="projects-grid"></div>
+        </div>
+        <div id="modal-root"></div>
+      </section>
+      <!-- Contact Section -->
+      <section id="contact" class="section contact-section">
+        <div class="container">
+          <h2>Contact</h2>
+          <div class="contact-content">
+            <div class="contact-info">
+              <h3>Me contacter</h3>
+              <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <p>yaliwachehi@gmail.com</p>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <p>06 67 16 76 57</p>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>Brest</p>
+              </div>
+            </div>
+            <form class="contact-form">
+              <div class="form-group">
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
