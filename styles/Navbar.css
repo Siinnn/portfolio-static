@@ -247,4 +247,62 @@
     height: 35px;
     font-size: 1.1rem;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+    justify-content: flex-start;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+    margin-right: auto;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .social-links {
+    gap: 1rem;
+    margin-left: auto;
+  }
+
+  .social-links a {
+    font-size: 1rem;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+    padding-left: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+
+  .social-links {
+    gap: 0.8rem;
+  }
+
+  .social-links a {
+    font-size: 0.9rem;
+  }
 } 
