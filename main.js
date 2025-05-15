@@ -198,5 +198,34 @@ function closeModal() {
   modalRoot.innerHTML = '';
 }
 
+
 renderSkillsFilter();
-renderProjects(); 
+renderProjects();
+
+// Gestion des animations au scroll
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observer les sections et les éléments avec la classe fade-in
+document.querySelectorAll('.section, .fade-in').forEach(element => {
+  observer.observe(element);
+});
+
+// Gestion de l'écran de chargement
+window.addEventListener('load', () => {
+  const loader = document.querySelector('.loading');
+  if (loader) {
+    loader.classList.add('hidden');
+  }
+}); 
