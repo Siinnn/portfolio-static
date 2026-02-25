@@ -1,13 +1,42 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2c3e50;
-  --background-color: #f8f9fa;
-  --text-color: #2c3e50;
-  --transition-speed: 0.3s;
-  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
-  --gradient-colors: #1a1a1a, #2c3e50, #3498db, #2c3e50;
+  /* Colors - Deep Blue Theme */
+  --primary: #3498db;
+  --secondary: #1e3a8a;
+  /* Deep blue */
+  --accent: #60a5fa;
+  /* Light blue accent */
+  --bg-dark: #0f172a;
+  /* Slate 900 - very dark blue */
+  --bg-light: #1e293b;
+  /* Slate 800 - dark blue */
+  --bg-glass: rgba(30, 41, 59, 0.7);
+  --text-main: #f1f5f9;
+  /* Light gray-blue for text */
+  --text-light: #ffffff;
+  --text-muted: #94a3b8;
+
+  /* Gradients */
+  --grad-main: linear-gradient(135deg, #1e3a8a, #0f172a);
+  --grad-dark: linear-gradient(-45deg, #0f172a, #1e293b, #1e3a8a, #0f172a);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(52, 152, 219, 0.4);
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 30px;
+  --container-width: 1200px;
+
+  /* Animation */
+  --anim-speed: 0.3s;
+  --anim-slow: 0.6s;
+  --anim-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -18,24 +47,95 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(-45deg, var(--gradient-colors));
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: var(--text-color);
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-main);
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* Background Animated Shapes */
+.bg-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.4;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--primary);
+  top: -100px;
+  right: -100px;
+  animation: float 20s infinite alternate;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--secondary);
+  bottom: 10%;
+  left: -50px;
+  animation: float 15s infinite alternate-reverse;
+}
+
+.shape-3 {
+  width: 250px;
+  height: 250px;
+  background: var(--accent);
+  top: 40%;
+  right: 15%;
+  animation: float 18s infinite alternate;
+  opacity: 0.2;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(50px, 100px) rotate(180deg);
+  }
+
+  100% {
+    transform: translate(-50px, 50px) rotate(360deg);
+  }
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
 .App {
@@ -51,10 +151,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+  background: var(--grad-dark);
   z-index: -1;
   animation: gradientBG 15s ease infinite;
   background-size: 400% 400%;
+  opacity: 0.6;
 }
 
 .container {
@@ -64,13 +165,14 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, #3498db, #2c3e50);
-  color: white;
+  background: var(--grad-main);
+  color: var(--text-light);
   padding: 4rem 0;
   text-align: center;
   opacity: 0;
   transform: translateY(-20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity var(--anim-slow) var(--anim-timing),
+    transform var(--anim-slow) var(--anim-timing);
 }
 
 .header.visible {
@@ -94,13 +196,12 @@ main {
 }
 
 .section {
-  min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 8rem 2rem;
   position: relative;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s var(--animation-timing),
-              transform 0.8s var(--animation-timing);
+  transition: opacity 0.8s var(--anim-timing),
+    transform 0.8s var(--anim-timing);
 }
 
 .section.visible {
@@ -108,8 +209,28 @@ main {
   transform: translateY(0);
 }
 
+.section h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 2.5rem;
+  color: var(--accent);
+  position: relative;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
 .section:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(10px);
 }
 
@@ -118,13 +239,14 @@ main {
 }
 
 .footer {
-  background-color: #2c3e50;
-  color: white;
-  padding: 2rem 0;
+  background-color: var(--secondary);
+  color: var(--text-light);
+  padding: 3rem 0;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity var(--anim-slow) var(--anim-timing),
+    transform var(--anim-slow) var(--anim-timing);
 }
 
 .footer.visible {
@@ -134,42 +256,69 @@ main {
 
 .footer .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 }
+
+
 
 .social-links {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-links a {
-  color: white;
-  font-size: 1.5rem;
-  transition: all var(--transition-speed) var(--animation-timing);
+  color: var(--text-light);
+  font-size: 1.2rem;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--anim-speed) var(--anim-timing);
   position: relative;
-  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  line-height: 1;
+  /* Reset line-height to help centering */
+}
+
+.social-links a i {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-links a:hover {
-  color: #3498db;
-  transform: translateY(-3px);
+  background: var(--primary);
+  transform: translateY(-5px);
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+  border-color: var(--accent);
 }
 
 .social-links a::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #3498db;
-  transition: all var(--transition-speed) var(--animation-timing);
+  background-color: var(--accent);
+  transition: all var(--anim-speed) var(--anim-timing);
   transform: translateX(-50%);
 }
 
 .social-links a:hover::after {
-  width: 100%;
+  width: 20px;
 }
 
 /* Animations pour les éléments de contenu */
@@ -177,7 +326,7 @@ main {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s var(--animation-timing),
-              transform 0.6s var(--animation-timing);
+    transform 0.6s var(--animation-timing);
 }
 
 .fade-in.visible {
@@ -192,12 +341,12 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--background-color);
+  background: var(--bg-light);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s var(--anim-timing);
 }
 
 .loading.hidden {
@@ -238,20 +387,21 @@ main {
 
 /* Animation pour les boutons */
 .btn {
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.8rem;
   border: none;
-  border-radius: 5px;
-  background: var(--primary-color);
-  color: white;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: var(--text-light);
   cursor: pointer;
-  transition: all var(--transition-speed) var(--animation-timing);
+  font-weight: 500;
+  transition: all var(--anim-speed) var(--anim-timing);
   position: relative;
   overflow: hidden;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .btn::after {
@@ -270,4 +420,4 @@ main {
 .btn:hover::after {
   width: 300px;
   height: 300px;
-} 
+}

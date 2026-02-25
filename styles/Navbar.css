@@ -7,12 +7,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 5%;
-  background: rgba(44, 62, 80, 0.95);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  border-bottom: 1px solid rgba(52, 152, 219, 0.3);
-  transform: translateY(0);
+  padding: 1.2rem 5%;
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(15px);
+  transition: all var(--anim-speed) var(--anim-timing);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar.hidden {
@@ -127,30 +126,7 @@
   width: 100%;
 }
 
-.social-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.social-links a {
-  color: #ecf0f1;
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background: rgba(52, 152, 219, 0.2);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-links a:hover {
-  background: rgba(52, 152, 219, 0.4);
-  transform: translateY(-3px);
-  color: #3498db;
-}
+/* Social links handled globally in App.css */
 
 .menu-icon {
   display: none;
@@ -305,4 +281,4 @@
   .social-links a {
     font-size: 0.9rem;
   }
-} 
+}

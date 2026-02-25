@@ -1,5 +1,5 @@
 // Animation typing pour la section About
-const fullText = "Développeur passionné, créatif et rigoureux, je transforme vos idées en solutions web innovantes.";
+const fullText = "Développeur passionné, créatif et rigoureux, je transforme vos idées en solutions web ou mobile de maniére innovantes.";
 const typingText = document.getElementById('typing-text');
 let currentIndex = 0;
 function typeWriter() {
@@ -7,6 +7,9 @@ function typeWriter() {
     typingText.textContent = fullText.slice(0, currentIndex);
     currentIndex++;
     setTimeout(typeWriter, 50);
+  } else if (currentIndex > fullText.length) {
+    const cursor = document.querySelector('.typing-cursor');
+    if (cursor) cursor.style.display = 'none';
   }
 }
 typeWriter();
@@ -48,7 +51,10 @@ const skills = [
   { id: 'flutter', name: 'Flutter', color: '#02569B' },
   { id: 'firebase', name: 'Firebase', color: '#FFCA28' },
   { id: 'django', name: 'Django', color: '#092E20' },
-  { id: 'python', name: 'Python', color: '#3776AB' }
+  { id: 'python', name: 'Python', color: '#3776AB' },
+  { id: 'typescript', name: 'TypeScript', color: '#3178C6' },
+  { id: 'tailwind', name: 'Tailwind CSS', color: '#06B6D4' },
+  { id: 'supabase', name: 'Supabase', color: '#3ECF8E' }
 ];
 
 const projects = [
@@ -85,17 +91,17 @@ const projects = [
   },
   {
     id: 3,
-    title: "TodoList Flutter",
-    description: "Application mobile de gestion de tâches avec authentification Firebase et synchronisation en temps réel",
-    image: "assets/todolist.jpg",
-    skills: ['flutter', 'firebase', 'javascript', 'git'],
-    videoUrl: "https://www.youtube.com/embed/ltDjm42RDXw",
+    title: "Shoffeur",
+    description: "Application mobile de gestion de courses VTC en temps réel pour administrateur unique",
+    image: "assets/shoffeur.jpg",
+    skills: ['flutter', 'firebase', 'git'],
     features: [
-      "Système d'authentification complet",
-      "Gestion de tâches personnalisée par utilisateur",
-      "Synchronisation en temps réel",
-      "Interface utilisateur moderne et intuitive",
-      "Notifications push"
+      "Architecture modulaire (Atomic Design)",
+      "Data Streaming temps réel (Firestore)",
+      "Sécurité administrateur (Email Whitelisting)",
+      "Dashboard de statistiques et revenus",
+      "Optimisation native (60 FPS) iOS/Android",
+      "Gestion d'états de chargement (Shimmers)"
     ]
   },
   {
@@ -111,6 +117,21 @@ const projects = [
       "Gestion des emprunts et retours",
       "Statistiques et rapports"
     ]
+  },
+  {
+    id: 5,
+    title: "AFAM Web",
+    description: "Application web moderne pour l'Association des Femmes Actives de Mutsumudu (Comores).",
+    skills: ['react', 'javascript', 'git', 'supabase', 'tailwind', 'typescript'],
+    features: [
+      "Dashboard Admin complet pour la gestion de contenu",
+      "Espace membre sécurisé avec authentification Supabase",
+      "Système de blog et gestion d'événements",
+      "Conformité RGPD (Export/Suppression de données)",
+      "Architecture moderne avec Next.js 15 App Router",
+      "Design responsive avec Tailwind CSS v4"
+    ],
+    siteUrl: "https://afam-web.vercel.app/"
   }
 ];
 
@@ -118,6 +139,26 @@ let selectedSkills = [];
 const skillsFilter = document.getElementById('skills-filter');
 const projectsGrid = document.getElementById('projects-grid');
 const modalRoot = document.getElementById('modal-root');
+
+// Gestion des animations au scroll
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observer les sections existantes
+document.querySelectorAll('.section, .fade-in').forEach(element => {
+  observer.observe(element);
+});
 
 function renderSkillsFilter() {
   skillsFilter.innerHTML = '';
@@ -145,9 +186,10 @@ function renderProjects() {
   const filtered = projects.filter(project =>
     selectedSkills.length === 0 || selectedSkills.every(skill => project.skills.includes(skill))
   );
-  filtered.forEach(project => {
+  filtered.forEach((project, index) => {
     const card = document.createElement('div');
-    card.className = 'project-card';
+    card.className = 'project-card fade-in';
+    card.style.transitionDelay = `${index * 0.1}s`;
     card.innerHTML = `
       <div class="project-header">
         <h3>${project.title}</h3>
@@ -156,21 +198,27 @@ function renderProjects() {
         <p>${project.description}</p>
         <div class="project-skills">
           ${project.skills.map(skillId => {
-            const skill = skills.find(s => s.id === skillId);
-            return `<span class="project-skill-tag" style="--skill-color: ${skill.color}">${skill.name}</span>`;
-          }).join('')}
+      const skill = skills.find(s => s.id === skillId);
+      if (!skill) return '';
+      return `<span class="project-skill-tag" style="--skill-color: ${skill.color}">${skill.name}</span>`;
+    }).join('')}
         </div>
         ${project.features ? `
-        <div class="project-features" style="--skill-color: ${skills.find(s => s.id === project.skills[0]).color}">
-          <h4>Fonctionnalités</h4>
+        <div class="project-features" style="--skill-color: ${skills.find(s => s.id === project.skills[0])?.color || 'var(--primary)'}">
+          <h4>Principales fonctionnalités</h4>
           <ul>
             ${project.features.map(f => `<li>${f}</li>`).join('')}
           </ul>
         </div>` : ''}
-        ${project.videoUrl ? `<button class="project-link" data-video="${project.videoUrl}">En savoir plus</button>` : ''}
+        <div class="project-actions">
+          ${project.videoUrl ? `<button class="project-link" data-video="${project.videoUrl}"><i class="fas fa-play"></i> Démo Vidéo</button>` : ''}
+          ${project.siteUrl ? `<a href="${project.siteUrl}" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Voir le site</a>` : ''}
+        </div>
       </div>
     `;
     projectsGrid.appendChild(card);
+    // Observer the new card
+    observer.observe(card);
   });
   // Ajout des listeners pour les boutons vidéo
   document.querySelectorAll('.project-link[data-video]').forEach(btn => {
@@ -202,30 +250,30 @@ function closeModal() {
 renderSkillsFilter();
 renderProjects();
 
-// Gestion des animations au scroll
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-// Observer les sections et les éléments avec la classe fade-in
-document.querySelectorAll('.section, .fade-in').forEach(element => {
-  observer.observe(element);
-});
-
 // Gestion de l'écran de chargement
 window.addEventListener('load', () => {
   const loader = document.querySelector('.loading');
   if (loader) {
     loader.classList.add('hidden');
   }
-}); 
+  initMagneticEffect();
+});
+
+// Magnetic effect for social links and buttons
+function initMagneticEffect() {
+  const magneticElements = document.querySelectorAll('.social-links a, .submit-btn, .project-link');
+
+  magneticElements.forEach(item => {
+    item.addEventListener('mousemove', e => {
+      const { left, top, width, height } = item.getBoundingClientRect();
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+
+      item.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      item.style.transform = `translate(0px, 0px)`;
+    });
+  });
+}
