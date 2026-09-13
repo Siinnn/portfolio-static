@@ -196,10 +196,11 @@ main {
 }
 
 .section {
-  padding: 8rem 2rem;
+  padding: 7rem 2rem;
   position: relative;
   opacity: 0;
   transform: translateY(30px);
+  scroll-margin-top: 90px;
   transition: opacity 0.8s var(--anim-timing),
     transform 0.8s var(--anim-timing);
 }
@@ -420,4 +421,29 @@ main {
 .btn:hover::after {
   width: 300px;
   height: 300px;
+}
+
+.btn-primary {
+  background: var(--grad-main);
+  color: var(--text-light);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(96, 165, 250, 0.08);
 }

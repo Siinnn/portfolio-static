@@ -39,9 +39,10 @@ document.getElementById('logo-top').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Projets et compétences (repris du composant React)
+// Compétences utilisées par les projets (tags filtrables)
 const skills = [
   { id: 'react', name: 'React', color: '#61DAFB' },
+  { id: 'nextjs', name: 'Next.js', color: '#e2e8f0' },
   { id: 'javascript', name: 'JavaScript', color: '#F7DF1E' },
   { id: 'html', name: 'HTML', color: '#E34F26' },
   { id: 'css', name: 'CSS', color: '#1572B6' },
@@ -54,30 +55,101 @@ const skills = [
   { id: 'python', name: 'Python', color: '#3776AB' },
   { id: 'typescript', name: 'TypeScript', color: '#3178C6' },
   { id: 'tailwind', name: 'Tailwind CSS', color: '#06B6D4' },
-  { id: 'supabase', name: 'Supabase', color: '#3ECF8E' }
+  { id: 'supabase', name: 'Supabase', color: '#3ECF8E' },
+  { id: 'nodejs', name: 'Node.js', color: '#68A063' },
+  { id: 'vite', name: 'Vite', color: '#8b7cf6' },
+  { id: 'leaflet', name: 'Leaflet', color: '#77b453' },
+  { id: 'ejs', name: 'EJS', color: '#b4ca65' }
 ];
 
+// Mes projets, classés du plus significatif au plus exploratoire.
+// badge : nature du projet (Client, Perso, Workshop, Jeu, Exercice)
+// siteUrl : site en ligne — githubUrl : dépôt source 
 const projects = [
   {
     id: 1,
-    title: "Portfolio",
-    description: "Mon portfolio personnel avec animations et design moderne",
-    image: "assets/logo-y.png",
-    skills: ['react', 'javascript', 'html', 'css'],
+    title: "Boucherie Halal MGH",
+    badge: "Client",
+    description: "Site vitrine et back-office pour une boucherie halal à Brest, avec catalogue produit et gestion autonome par le commerçant.",
+    skills: ['nextjs', 'typescript', 'tailwind', 'supabase', 'nodejs'],
     features: [
-      "Design moderne et responsive",
-      "Animations fluides au scroll",
-      "Filtrage des projets par compétences",
-      "Modale vidéo pour les démonstrations",
-      "Thème sombre avec accents bleus",
-      "Navigation fluide entre les sections"
-    ]
+      "Catalogue produits par catégorie avec prix et photos",
+      "Offres promotionnelles limitées dans le temps",
+      "Tableau de bord admin pour gérer produits, galerie, horaires",
+      "Galerie photo publique et fiche contact/localisation",
+      "Fonctionne même sans base de données (mode démo en JSON)",
+      "Design responsive sur mesure (bordeaux, crème, anthracite)"
+    ],
+    siteUrl: "https://boucherie-mgh.vercel.app",
+    githubUrl: "https://github.com/Siinnn/boucherie-mgh"
   },
   {
     id: 2,
+    title: "JobReady",
+    badge: "Workshop France Travail",
+    description: "Outil web de création de CV et lettres de motivation orienté compatibilité ATS, développé pour mes ateliers à France Travail Brest Marine.",
+    skills: ['nextjs', 'react', 'tailwind', 'javascript'],
+    features: [
+      "Parcours guidé en 7 étapes pour construire son CV",
+      "Double score qualité générale + compatibilité ATS avec 19 vérifications",
+      "Éditeur en double panneau avec aperçu en temps réel et export PDF",
+      "Création de lettres de motivation en 3 étapes (structure en 4 paragraphes)",
+      "Assistant de reformulation et générateur d'accroche",
+      "Espace admin pour centraliser des offres d'emploi"
+    ],
+    siteUrl: "https://jobready-five.vercel.app"
+  },
+  {
+    id: 3,
+    title: "AFAM Web",
+    badge: "Client associatif",
+    description: "Application web moderne pour l'Association des Femmes Actives de Mutsumudu (Comores).",
+    skills: ['react', 'javascript', 'git', 'supabase', 'tailwind', 'typescript'],
+    features: [
+      "Dashboard Admin complet pour la gestion de contenu",
+      "Espace membre sécurisé avec authentification Supabase",
+      "Système de blog et gestion d'événements",
+      "Conformité RGPD (Export/Suppression de données)",
+      "Architecture moderne avec Next.js 15 App Router",
+      "Design responsive avec Tailwind CSS v4"
+    ],
+    siteUrl: "https://afam-web.vercel.app/"
+  },
+  {
+    id: 4,
+    title: "Shoffeur",
+    badge: "Perso",
+    description: "Application mobile de gestion de courses VTC en temps réel pour administrateur unique",
+    skills: ['flutter', 'firebase', 'git'],
+    features: [
+      "Architecture modulaire (Atomic Design)",
+      "Data Streaming temps réel (Firestore)",
+      "Sécurité administrateur (Email Whitelisting)",
+      "Dashboard de statistiques et revenus",
+      "Optimisation native (60 FPS) iOS/Android",
+      "Gestion d'états de chargement (Shimmers)"
+    ]
+  },
+  {
+    id: 5,
+    title: "Undercover",
+    badge: "Jeu",
+    description: "Jeu de déduction sociale à jouer entre amis : chaque joueur reçoit un rôle en secret et doit démasquer l'imposteur.",
+    skills: ['nextjs', 'typescript', 'react'],
+    features: [
+      "Création de partie avec pseudo et couleur personnalisés",
+      "Mode hôte ou rejoindre une partie existante",
+      "Parties de 3 à 8 joueurs",
+      "Compte créateur avec fonctionnalités additionnelles",
+      "Interface minimaliste centrée sur la rapidité de jeu"
+    ],
+    siteUrl: "https://undercover-rose.vercel.app"
+  },
+  {
+    id: 6,
     title: "Gestion de Films",
+    badge: "Exercice",
     description: "Application web de gestion de films avec système de notation et commentaires",
-    image: "assets/cinema.jpg",
     skills: ['php', 'sql', 'html', 'css', 'javascript', 'git'],
     videoUrl: "https://www.youtube.com/embed/0lBw_ptKmJY",
     features: [
@@ -90,25 +162,10 @@ const projects = [
     ]
   },
   {
-    id: 3,
-    title: "Shoffeur",
-    description: "Application mobile de gestion de courses VTC en temps réel pour administrateur unique",
-    image: "assets/shoffeur.jpg",
-    skills: ['flutter', 'firebase', 'git'],
-    features: [
-      "Architecture modulaire (Atomic Design)",
-      "Data Streaming temps réel (Firestore)",
-      "Sécurité administrateur (Email Whitelisting)",
-      "Dashboard de statistiques et revenus",
-      "Optimisation native (60 FPS) iOS/Android",
-      "Gestion d'états de chargement (Shimmers)"
-    ]
-  },
-  {
-    id: 4,
+    id: 7,
     title: "Bibliodrive Django",
+    badge: "Exercice",
     description: "Site web de gestion de bibliothèque avec interface d'administration Django",
-    image: "assets/bibliodrive.jpg",
     skills: ['django', 'python', 'html', 'css', 'sql'],
     features: [
       "Gestion complète des livres et auteurs",
@@ -119,19 +176,63 @@ const projects = [
     ]
   },
   {
-    id: 5,
-    title: "AFAM Web",
-    description: "Application web moderne pour l'Association des Femmes Actives de Mutsumudu (Comores).",
-    skills: ['react', 'javascript', 'git', 'supabase', 'tailwind', 'typescript'],
+    id: 8,
+    title: "Recipes App",
+    badge: "Perso",
+    description: "Application de recherche de recettes avec favoris et authentification, connectée à l'API Tasty.",
+    skills: ['react', 'typescript', 'css'],
     features: [
-      "Dashboard Admin complet pour la gestion de contenu",
-      "Espace membre sécurisé avec authentification Supabase",
-      "Système de blog et gestion d'événements",
-      "Conformité RGPD (Export/Suppression de données)",
-      "Architecture moderne avec Next.js 15 App Router",
-      "Design responsive avec Tailwind CSS v4"
+      "Recherche de recettes par nom ou ingrédient",
+      "Fiche détaillée : ingrédients, temps de cuisson, instructions",
+      "Gestion d'une liste de favoris",
+      "Authentification et persistance via localStorage",
+      "Interface responsive desktop et mobile"
     ],
-    siteUrl: "https://afam-web.vercel.app/"
+    githubUrl: "https://github.com/Siinnn/Recipes-app"
+  },
+  {
+    id: 9,
+    title: "Carte Interactive",
+    badge: "Perso",
+    description: "Carte interactive générée à partir d'images TIFF géoréférencées, avec zoom et navigation fluide.",
+    skills: ['react', 'vite', 'leaflet', 'css'],
+    features: [
+      "Affichage d'une carte interactive avec Leaflet",
+      "Zoom et déplacement fluides",
+      "Découpage de l'image en tuiles pour un rendu performant",
+      "Interface responsive optimisée mobile",
+      "Panneau d'information sur le procédé TIFF → carte web"
+    ],
+    githubUrl: "https://github.com/Siinnn/carte-interactive"
+  },
+  {
+    id: 10,
+    title: "Netflix Clone",
+    badge: "Exercice",
+    description: "Reproduction de l'interface Netflix pour s'entraîner à la mise en page et au rendu serveur.",
+    skills: ['nodejs', 'ejs', 'css'],
+    features: [
+      "Rendu de pages côté serveur avec EJS",
+      "Reproduction fidèle de la grille et du header Netflix",
+      "Structure de projet Node.js classique"
+    ],
+    githubUrl: "https://github.com/Siinnn/netflix"
+  },
+  {
+    id: 11,
+    title: "Ce portfolio",
+    badge: "Perso",
+    description: "Mon portfolio personnel, statique et sans framework, avec animations et filtrage des projets par compétences.",
+    image: "assets/logo-y.png",
+    skills: ['javascript', 'html', 'css'],
+    features: [
+      "Design sombre moderne et responsive",
+      "Animations fluides au scroll",
+      "Filtrage des projets par compétences",
+      "Modale vidéo pour les démonstrations",
+      "Navigation fluide entre les sections"
+    ],
+    githubUrl: "https://github.com/Siinnn/portfolio-static"
   }
 ];
 
@@ -160,9 +261,13 @@ document.querySelectorAll('.section, .fade-in').forEach(element => {
   observer.observe(element);
 });
 
+// Ne montrer dans le filtre que les compétences réellement utilisées par un projet
+const usedSkillIds = new Set(projects.flatMap(p => p.skills));
+const filterableSkills = skills.filter(s => usedSkillIds.has(s.id));
+
 function renderSkillsFilter() {
   skillsFilter.innerHTML = '';
-  skills.forEach(skill => {
+  filterableSkills.forEach(skill => {
     const btn = document.createElement('button');
     btn.className = 'skill-tag' + (selectedSkills.includes(skill.id) ? ' selected' : '');
     btn.textContent = skill.name;
@@ -186,12 +291,20 @@ function renderProjects() {
   const filtered = projects.filter(project =>
     selectedSkills.length === 0 || selectedSkills.every(skill => project.skills.includes(skill))
   );
+
+  if (filtered.length === 0) {
+    projectsGrid.innerHTML = '<p class="projects-empty">Aucun projet ne correspond à cette combinaison de compétences.</p>';
+    return;
+  }
+
   filtered.forEach((project, index) => {
     const card = document.createElement('div');
     card.className = 'project-card fade-in';
-    card.style.transitionDelay = `${index * 0.1}s`;
+    card.style.transitionDelay = `${index * 0.08}s`;
+    card.style.setProperty('--skill-color', skills.find(s => s.id === project.skills[0])?.color || 'var(--primary)');
     card.innerHTML = `
       <div class="project-header">
+        ${project.badge ? `<span class="project-badge">${project.badge}</span>` : ''}
         <h3>${project.title}</h3>
       </div>
       <div class="project-content">
@@ -204,7 +317,7 @@ function renderProjects() {
     }).join('')}
         </div>
         ${project.features ? `
-        <div class="project-features" style="--skill-color: ${skills.find(s => s.id === project.skills[0])?.color || 'var(--primary)'}">
+        <div class="project-features">
           <h4>Principales fonctionnalités</h4>
           <ul>
             ${project.features.map(f => `<li>${f}</li>`).join('')}
@@ -213,6 +326,7 @@ function renderProjects() {
         <div class="project-actions">
           ${project.videoUrl ? `<button class="project-link" data-video="${project.videoUrl}"><i class="fas fa-play"></i> Démo Vidéo</button>` : ''}
           ${project.siteUrl ? `<a href="${project.siteUrl}" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Voir le site</a>` : ''}
+          ${project.githubUrl ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link project-link-secondary"><i class="fab fa-github"></i> Code source</a>` : ''}
         </div>
       </div>
     `;
@@ -259,9 +373,8 @@ window.addEventListener('load', () => {
   initMagneticEffect();
 });
 
-// Magnetic effect for social links and buttons
 function initMagneticEffect() {
-  const magneticElements = document.querySelectorAll('.social-links a, .submit-btn, .project-link');
+  const magneticElements = document.querySelectorAll('.social-links a, .submit-btn, .project-link, .btn');
 
   magneticElements.forEach(item => {
     item.addEventListener('mousemove', e => {
