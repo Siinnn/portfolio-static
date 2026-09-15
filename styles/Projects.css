@@ -8,20 +8,6 @@
   overflow: hidden;
 }
 
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .projects-section::before {
   content: '';
   position: absolute;
@@ -30,8 +16,8 @@
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(44, 62, 80, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(232, 163, 61, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(79, 209, 197, 0.08) 0%, transparent 50%);
   z-index: 0;
   animation: pulse 8s ease-in-out infinite;
 }
@@ -62,18 +48,17 @@
   font-size: 3.5rem;
   margin-bottom: 3rem;
   text-align: center;
-  text-shadow: var(--shadow-glow);
-  animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2.4s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+    text-shadow: 0 0 10px rgba(232, 163, 61, 0.25);
   }
 
   to {
-    text-shadow: 0 0 20px rgba(52, 152, 219, 0.5),
-      0 0 30px rgba(52, 152, 219, 0.3);
+    text-shadow: 0 0 20px rgba(232, 163, 61, 0.45),
+      0 0 32px rgba(79, 209, 197, 0.2);
   }
 }
 
@@ -89,7 +74,7 @@
   padding: 0.6rem 1.6rem;
   border: 2px solid var(--skill-color);
   border-radius: var(--radius-lg);
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--bg-glass);
   color: var(--text-light);
   font-weight: 500;
   cursor: pointer;
@@ -120,7 +105,7 @@
 .skill-tag:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 5px 15px var(--skill-color);
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--bg-glass-strong);
 }
 
 .skill-tag.selected {
@@ -144,19 +129,18 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: all 0.4s var(--anim-timing);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-glass);
   border-top: 3px solid var(--skill-color, var(--primary));
   backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
 }
 
-
 .project-card:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
-  border-color: rgba(52, 152, 219, 0.4);
-  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(232, 163, 61, 0.35);
+  background: var(--bg-glass-strong);
 }
 
 .project-header {
@@ -205,12 +189,12 @@
 .project-content h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #3498db;
-  text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(79, 209, 197, 0.25);
 }
 
 .project-content p {
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -224,7 +208,7 @@
 
 .project-skill-tag {
   padding: 0.3rem 0.8rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(6, 11, 20, 0.55);
   border-radius: 15px;
   font-size: 0.8rem;
   color: var(--skill-color);
@@ -233,7 +217,7 @@
 }
 
 .project-skill-tag:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(6, 11, 20, 0.8);
   transform: translateY(-2px);
 }
 
@@ -272,7 +256,7 @@
 
 .project-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+  box-shadow: 0 5px 15px rgba(232, 163, 61, 0.4);
 }
 
 .project-actions {
@@ -343,7 +327,7 @@
   border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(52, 152, 219, 0.2);
+  border: 1px solid rgba(232, 163, 61, 0.2);
   animation: modalAppear 0.4s var(--anim-timing);
 }
 
@@ -363,7 +347,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(52, 152, 219, 0.2);
+  background: rgba(232, 163, 61, 0.2);
   border: none;
   color: #fff;
   width: 30px;
@@ -378,14 +362,14 @@
 }
 
 .modal-close:hover {
-  background: rgba(52, 152, 219, 0.4);
+  background: rgba(232, 163, 61, 0.4);
   transform: rotate(90deg);
 }
 
 .modal-content iframe {
   border-radius: 10px;
   border: none;
-  box-shadow: 0 0 20px rgba(52, 152, 219, 0.2);
+  box-shadow: 0 0 20px rgba(232, 163, 61, 0.2);
 }
 
 .project-features {
@@ -410,7 +394,7 @@
 }
 
 .project-features li {
-  color: #ecf0f1;
+  color: var(--text-main);
   padding: 0.3rem 0;
   display: flex;
   align-items: center;

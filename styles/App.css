@@ -1,31 +1,45 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
 :root {
-  /* Colors - Deep Blue Theme */
-  --primary: #3498db;
-  --secondary: #1e3a8a;
-  /* Deep blue */
-  --accent: #60a5fa;
-  /* Light blue accent */
-  --bg-dark: #0f172a;
-  /* Slate 900 - very dark blue */
-  --bg-light: #1e293b;
-  /* Slate 800 - dark blue */
-  --bg-glass: rgba(30, 41, 59, 0.7);
-  --text-main: #f1f5f9;
-  /* Light gray-blue for text */
+  /* Colors - "Bridge at Night" theme: deep navy hull + amber instrument-glow */
+  --bg-deep: #060b14;
+  /* near-black navy - page background */
+  --bg-surface: #0b1522;
+  /* section band background */
+  --bg-elevated: #101d30;
+  /* card base before glass alpha */
+  --bg-dark: #060b14;
+  --bg-light: #101d30;
+  --bg-glass: rgba(16, 29, 48, 0.6);
+  --bg-glass-strong: rgba(16, 29, 48, 0.85);
+  --border-glass: rgba(148, 178, 209, 0.14);
+
+  --primary: #e8a33d;
+  /* amber instrument glow - primary accent */
+  --primary-bright: #f6c36b;
+  --secondary: #0c3b52;
+  /* deep teal-navy */
+  --accent: #4fd1c5;
+  /* radar cyan - secondary accent */
+  --accent-soft: rgba(79, 209, 197, 0.14);
+
+  --text-main: #e9f1f8;
+  /* foam white */
   --text-light: #ffffff;
-  --text-muted: #94a3b8;
+  --text-muted: #8ca0b8;
+  /* steel blue-grey */
 
   /* Gradients */
-  --grad-main: linear-gradient(135deg, #1e3a8a, #0f172a);
-  --grad-dark: linear-gradient(-45deg, #0f172a, #1e293b, #1e3a8a, #0f172a);
+  --grad-main: linear-gradient(135deg, #e8a33d, #c97a2b);
+  --grad-dark: linear-gradient(-45deg, #060b14, #0b1522, #0c3b52, #060b14);
+  --grad-text: linear-gradient(135deg, #f6c36b, #e8a33d 55%, #4fd1c5);
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(52, 152, 219, 0.4);
+  --shadow-glow: 0 0 22px rgba(232, 163, 61, 0.35);
+  --shadow-glow-accent: 0 0 22px rgba(79, 209, 197, 0.3);
 
   /* Layout */
   --radius-sm: 8px;
@@ -37,6 +51,20 @@
   --anim-speed: 0.3s;
   --anim-slow: 0.6s;
   --anim-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-speed: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 * {
@@ -48,10 +76,32 @@
 
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: var(--bg-light);
+  background: var(--bg-deep);
   color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+.logo {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--grad-text);
+  background-size: 200% auto;
+  z-index: 1200;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 12px rgba(232, 163, 61, 0.5);
 }
 
 @keyframes gradientBG {
@@ -89,53 +139,60 @@ body {
 }
 
 .shape-1 {
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   background: var(--primary);
   top: -100px;
   right: -100px;
-  animation: float 20s infinite alternate;
+  animation: float 22s infinite alternate;
 }
 
 .shape-2 {
-  width: 300px;
-  height: 300px;
-  background: var(--secondary);
+  width: 320px;
+  height: 320px;
+  background: var(--accent);
   bottom: 10%;
-  left: -50px;
-  animation: float 15s infinite alternate-reverse;
+  left: -60px;
+  animation: float 17s infinite alternate-reverse;
+  opacity: 0.22;
 }
 
 .shape-3 {
-  width: 250px;
-  height: 250px;
+  width: 260px;
+  height: 260px;
+  background: var(--primary-bright);
+  top: 42%;
+  right: 12%;
+  animation: float 20s infinite alternate;
+  opacity: 0.16;
+}
+
+.shape-4 {
+  width: 180px;
+  height: 180px;
   background: var(--accent);
-  top: 40%;
-  right: 15%;
-  animation: float 18s infinite alternate;
-  opacity: 0.2;
+  bottom: 30%;
+  right: 30%;
+  animation: float 26s infinite alternate-reverse;
+  opacity: 0.14;
 }
 
 @keyframes float {
   0% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
 
-  50% {
-    transform: translate(50px, 100px) rotate(180deg);
+  33% {
+    transform: translate(40px, 80px) rotate(120deg) scale(1.06);
+  }
+
+  66% {
+    transform: translate(-45px, 30px) rotate(240deg) scale(0.96);
   }
 
   100% {
-    transform: translate(-50px, 50px) rotate(360deg);
+    transform: translate(-20px, 60px) rotate(360deg) scale(1);
   }
-}
-
-body {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: var(--bg-dark);
-  color: var(--text-main);
-  overflow-x: hidden;
-  line-height: 1.6;
 }
 
 .App {
@@ -342,7 +399,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg-light);
+  background: var(--bg-deep);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -353,6 +410,22 @@ main {
 .loading.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid rgba(232, 163, 61, 0.15);
+  border-top-color: var(--primary);
+  border-right-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Améliorations pour le responsive */

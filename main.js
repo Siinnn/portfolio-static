@@ -18,6 +18,7 @@ typeWriter();
 let lastScrollY = window.scrollY;
 let isVisible = true;
 const navbar = document.querySelector('.navbar');
+const scrollProgress = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
   const currentScrollY = window.scrollY;
   if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -33,6 +34,28 @@ window.addEventListener('scroll', () => {
   } else {
     navbar.classList.remove('scrolled');
   }
+  if (scrollProgress) {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (currentScrollY / docHeight) * 100 : 0;
+    scrollProgress.style.width = `${progress}%`;
+  }
+});
+
+// Surligne le lien de nav correspondant à la section visible
+const navLinks = document.querySelectorAll('.nav-links a');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+
+document.querySelectorAll('#competences, #projets').forEach(section => {
+  sectionObserver.observe(section);
 });
 
 document.getElementById('logo-top').addEventListener('click', () => {
@@ -257,13 +280,30 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observer les sections existantes
-document.querySelectorAll('.section, .fade-in').forEach(element => {
+document.querySelectorAll('.section, .fade-in, .footer').forEach(element => {
   observer.observe(element);
 });
 
 // Ne montrer dans le filtre que les compétences réellement utilisées par un projet
 const usedSkillIds = new Set(projects.flatMap(p => p.skills));
 const filterableSkills = skills.filter(s => usedSkillIds.has(s.id));
+
+// Statistiques rapides dérivées des projets réels, affichées dans le hero
+const heroStats = document.getElementById('hero-stats');
+if (heroStats) {
+  const clientProjects = projects.filter(p => (p.badge || '').toLowerCase().includes('client')).length;
+  const stats = [
+    { value: projects.length, label: 'Projets réalisés' },
+    { value: filterableSkills.length, label: 'Technologies utilisées' },
+    { value: clientProjects, label: 'Projets clients' }
+  ];
+  heroStats.innerHTML = stats.map(s => `
+    <div class="hero-stat">
+      <strong>${s.value}</strong>
+      <span>${s.label}</span>
+    </div>
+  `).join('');
+}
 
 function renderSkillsFilter() {
   skillsFilter.innerHTML = '';
@@ -374,6 +414,7 @@ window.addEventListener('load', () => {
 });
 
 function initMagneticEffect() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const magneticElements = document.querySelectorAll('.social-links a, .submit-btn, .project-link, .btn');
 
   magneticElements.forEach(item => {
